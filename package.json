@@ -1,0 +1,32 @@
+{
+  "name": "coffee-log",
+  "version": "1.0.0",
+  "description": "travk coffee beans and brew parameters",
+  "private": true,
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "webpack-dev-server --open",
+    "server": "node server.js",
+    "build": "webpack"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tlutz888/coffee-log.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/tlutz888/coffee-log/issues"
+  },
+  "homepage": "https://github.com/tlutz888/coffee-log#readme",
+  "devDependencies": {
+    "css-loader": "^3.5.3",
+    "express": "^4.17.1",
+    "file-loader": "^6.0.0",
+    "style-loader": "^1.2.1",
+    "webpack": "^4.43.0",
+    "webpack-cli": "^3.3.11",
+    "webpack-dev-middleware": "^3.7.2",
+    "webpack-dev-server": "^3.11.0"
+  }
+}
