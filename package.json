@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "webpack-dev-server --open",
-    "server": "node server/server.js",
+    "server": "nodemon server/server.js",
     "build": "webpack"
   },
   "repository": {
@@ -32,5 +32,8 @@
     "webpack-cli": "^3.3.11",
     "webpack-dev-middleware": "^3.7.2",
     "webpack-dev-server": "^3.11.0"
+  },
+  "dependencies": {
+    "pg": "^8.2.1"
   }
 }
