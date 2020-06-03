@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "webpack-dev-server --open",
-    "server": "node server.js",
+    "server": "node server/server.js",
     "build": "webpack"
   },
   "repository": {
@@ -20,6 +20,10 @@
   },
   "homepage": "https://github.com/tlutz888/coffee-log#readme",
   "devDependencies": {
+    "@babel/core": "^7.10.2",
+    "@babel/preset-env": "^7.10.2",
+    "@babel/preset-react": "^7.10.1",
+    "babel-loader": "^8.1.0",
     "css-loader": "^3.5.3",
     "express": "^4.17.1",
     "file-loader": "^6.0.0",
