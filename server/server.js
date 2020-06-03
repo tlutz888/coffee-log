@@ -17,12 +17,18 @@ app.use('./dist', express.static('../dist'));
 
 app.get('/', (req, res) => {
   console.log('hello');
-  res.sendFile(path.join(__dirname, '../dist/index.html'))
+  res.sendFile(path.join(__dirname, '../client/index.html'))
 });
+
+app.get('/get-coffees/', posgresController.getCoffees, (req, res) => {
+  console.log('got coffees! ', res.locals.data)
+  res.sendFile(path.join(__dirname, '../client/index.html'))
+})
+
 
 app.post('/add/', posgresController.addCoffee, (req, res) => {
   console.log('add, req.body: ', req.body)
-  res.sendFile(path.join(__dirname, '../dist/index.html'))
+  res.sendFile(path.join(__dirname, '../client/index.html'))
 })
 
 

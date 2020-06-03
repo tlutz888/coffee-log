@@ -1,15 +1,27 @@
+const webpack = require('webpack');
 const path = require('path');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+
 
 module.exports = {
   mode: 'development',
-  entry: './src/index.js',
+  entry: './client/index.js',
   output: {
     filename: 'bundle.js',
     path: path.resolve(__dirname, 'dist'),
     publicPath: '/',
   },
   devServer: {
-    contentBase: '/dist',
+    contentBase: path.resolve(__dirname, 'dist'),
+    host: 'localhost',
+    port: 8080,
+    hot: true,
+    publicPath: '/dist/',
+    historyApiFallback: true,
+
+    inline: true,
+
+
   },
   module: {
     rules: [
@@ -37,5 +49,14 @@ module.exports = {
         ],
       },
     ],
+  },
+  plugins: [
+    new HtmlWebpackPlugin({
+      template: './client/index.html',
+    }),
+  ],
+  resolve: {
+    // Enable importing JS / JSX files without specifying their extension
+    extensions: ['.js', '.jsx'],
   },
 };
