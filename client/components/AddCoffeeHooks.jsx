@@ -46,7 +46,9 @@ const AddCoffee = (props) => {
         console.log('received response')
         return res.json()})
       .then(data => {
-        console.log(data)
+        console.log(data);
+        console.log(props)
+        props.updateList();
       })
       .catch(err => console.log('err in mainContainer post ', err))
   }

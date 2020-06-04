@@ -11,21 +11,23 @@ class MainContainer extends Component {
       coffees: [],
     };
     this.deleteCoffee = this.deleteCoffee.bind(this);
-    
+    this.updateList = this.updateList.bind(this);
   }
 
   componentDidMount() {
     console.log('component mounted')
-    fetch('/api')
-      .then(res => res.json())
-      .then(data => {
-        console.log('data from get all coffees request: ', data);
-        this.setState({coffees: data})
-      })
-      .catch(err => console.log('err in mainContainer fetch ', err))
+    this.updateList()
   }
 
-
+  updateList () {
+    fetch('/api')
+    .then(res => res.json())
+    .then(data => {
+      console.log('data from get all coffees request: ', data);
+      this.setState({coffees: data})
+    })
+    .catch(err => console.log('err in mainContainer fetch ', err))
+  }
 
   deleteCoffee(el, e) {
     console.log('delete clicked', el.coffeeId)
@@ -37,15 +39,7 @@ class MainContainer extends Component {
       },
       body: JSON.stringify({coffeeId: el.coffeeId})
     })
-      .then(res => {if (res.status === 204) alert('coffee has been deleted')})
-      .then(() => {
-        const newCoffees = this.state.coffees.filter(coffee => {
-          if (coffee._id === el.coffeeId) return false;
-          return true;
-        }).reverse();
-        this.setState({coffees: newCoffees})
-        console.log(this.state.coffees)
-      })
+      .then(this.updateList())
   }
 
   render() {
@@ -66,7 +60,7 @@ class MainContainer extends Component {
 
       <div>
         {/* <AddCoffee/> */}
-        <AddCoffeeHooks/>
+        <AddCoffeeHooks updateList={this.updateList}/>
         {coffeeCards}
     </div>
     );
