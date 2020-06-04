@@ -2,3 +2,38 @@
   margin: 1rem;
   font-family: Arial, Helvetica, sans-serif;
 }
+
+.CoffeeCard {
+  background-color: burlywood;
+  border: 1px solid tan;
+  margin: 5px;
+  padding: 5px;
+  box-shadow: 2px 2px #888888;
+
+}
+
+.coffeeForm {
+  background-color: burlywood;
+  border: 1px solid tan;
+  margin: 5px;
+  padding: 5px;
+  box-shadow: 2px 2px #888888;
+
+}
+
+.coffeeForm div {
+  background-color: burlywood;
+  border: 1px solid tan;
+  margin: 5px;
+  padding: 5px;
+  box-shadow: 1px 1px  #888888;
+}
+
+/* .coffeeForm div {
+  background-color: wheat;
+} */
+
+.coffeeForm div input, .coffeeForm div select {
+  /* background-color: rgb(255, 246, 235); */
+  float: right;
+}

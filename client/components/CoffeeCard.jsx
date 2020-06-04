@@ -10,7 +10,7 @@ const CoffeeCard = (props) => {
     return <li key={`coffee ${props._id} ${el[0]}`}>{`${el[0]}: ${el[1]}`}</li>
   })
   return (
-    <div>
+    <div className="CoffeeCard">
       <ul>
         {details}
       </ul>
