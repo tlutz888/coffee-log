@@ -12,13 +12,30 @@ module.exports = {
     publicPath: '/',
   },
   devServer: {
-    contentBase: path.resolve(__dirname, 'dist'),
+    historyApiFallback: true,
+    headers: { 'Access-Control-Allow-Origin': '*' },
+
+
+    contentBase: path.resolve(__dirname, './client'),
     host: 'localhost',
     port: 8080,
     hot: true,
     publicPath: '/dist/',
     historyApiFallback: true,
+    proxy: {
+      '/api*':  {
+        target: 'http://localhost:3000/',
+        secure: false,
+      },
+      '/add*':  {
+        target: 'http://localhost:3000/',
+        secure: false,
+      },
 
+      changeOrigin: true,
+
+      secure: false,
+    },
     inline: true,
 
 

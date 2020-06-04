@@ -18,7 +18,20 @@ postgresController.getCoffees = (req, res, next) => {
 
 postgresController.addCoffee = (req, res, next) => {
   console.log('in postgresController.addCoffee, req.body: ', req.body)
-  next();
+  const { roaster_id, bean_name, bean_origin, roast_date, brew_details, rating } = req.body;
+  const values  = [roaster_id, bean_name, bean_origin, roast_date, brew_details, rating];
+  console.log(values)
+  const queryText = 'INSERT INTO beans (roaster_id, bean_name, bean_origin, roast_date, brew_details, rating)  VALUES($1, $2, $3, $4, $5, $6)'
+  db.query(queryText, values)
+    .then(data => {
+      console.log(data)
+      next();
+    })
+    .catch(err => next({
+      log: 'Error in postgresController.getCoffees',
+      status: 400,
+      message: err,
+    }))
 };
 
 module.exports = postgresController;
