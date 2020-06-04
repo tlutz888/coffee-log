@@ -4,7 +4,7 @@ class AddCoffee extends Component {
   constructor(props){
     super(props);
     this.state = {
-      roaster: 1,
+      roaster_id: 1,
       bean_name: '',
       bean_origin: '',
       roast_date: Date.now(),
@@ -24,18 +24,18 @@ class AddCoffee extends Component {
     // do this
     console.log('clicked, e: ',e) 
     console.log('state: ', this.state)
-    const {roaster, bean_name, bean_origin, brew_details, rating} = this.state;
+    const {roaster_id, bean_name, bean_origin, brew_details, rating} = this.state;
     let { roast_date } = this.state;
     roast_date = new Date(roast_date)
     const reqData = {
-      roaster, 
+      roaster_id, 
       bean_name, 
       bean_origin, 
       roast_date, 
       brew_details, 
       rating
     }
-    console.log(reqData)
+    // console.log(reqData)
 
     fetch('/api', {
       method: 'POST',
@@ -45,7 +45,6 @@ class AddCoffee extends Component {
       body: JSON.stringify(reqData)})
       .then(res => {
         console.log('received response')
-        console.log(res)
         return res.json()})
       .then(data => {
         console.log(data)
@@ -56,18 +55,17 @@ class AddCoffee extends Component {
   }
 
   render(){
-    const {roaster, bean_name, bean_origin, brew_details, rating} = this.state;
+    const {roaster_id, bean_name, bean_origin, brew_details, rating} = this.state;
     let { roast_date } = this.state;
     roast_date = new Date(roast_date)
-    console.log(typeof roast_date) 
 
     return (
       <div className="coffeeForm">
         <h2>Enter New Coffee: </h2>
 
         <div className="roaster-entry">
-        <label htmlFor="roaster">Roaster: </label>
-        <select  name="roaster" value={this.state.roaster} onChange={this.handleChange}>
+        <label htmlFor="roaster_id">Roaster: </label>
+        <select  name="roaster_id" value={this.state.roaster_id} onChange={this.handleChange}>
             <option value="1">Vesta</option>
             <option value="2">Mothership</option>
             <option value="3">Dark Moon</option>

@@ -25,13 +25,33 @@ postgresController.addCoffee = (req, res, next) => {
   db.query(queryText, values)
     .then(data => {
       console.log(`${bean_name} has been added to the DB`)
-      next();
+      return next();
     })
     .catch(err => next({
       log: 'Error in postgresController.getCoffees',
       status: 400,
       message: err,
-    }))
+    }));
 };
+
+postgresController.deleteCoffee = (req, res, next) => {
+  console.log('deleting coffee');
+  console.log('in postgresController.deleteCoffee, req.body: ', req.body);
+
+  const {coffeeId } = req.body;
+  console.log(coffeeId);
+  const values = [coffeeId];
+  const queryText = 'DELETE FROM beans WHERE _id = ($1)';
+  db.query(queryText, values)
+    .then(data => {
+      console.log(`coffeeId: ${coffeeId} has been deleted`);
+      return next();
+    })
+    .catch(err => next({
+      log: 'Error in postgresController.deleteCoffee',
+      status: 400,
+      message: err,
+    }));
+}
 
 module.exports = postgresController;

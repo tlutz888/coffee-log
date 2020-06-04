@@ -5,7 +5,7 @@ const path = require('path')
 const cors = require('cors');
 
 
-const posgresController = require('./controllers/postgresController')
+const postgresController = require('./controllers/postgresController')
 const app = express();
 
 /**
@@ -24,17 +24,23 @@ app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, '../client/index.html'))
 });
 
-app.get('/api', posgresController.getCoffees, (req, res) => {
+app.get('/api', postgresController.getCoffees, (req, res) => {
   console.log('at /api ');
   res.status(200).json(res.locals.data);
 })
 
 
-app.post('/api', posgresController.addCoffee, (req, res) => {
+app.post('/api', postgresController.addCoffee, (req, res) => {
   // console.log('add, req.body: ', req.body)
-  res.status(200).send('coffee, added!');
+  res.status(201).json('coffee, added!');
 })
 
+app.delete('/api', postgresController.deleteCoffee, (req, res) => {
+  // res.status(200).json(`working on stuff`)
+
+  res.sendStatus(204)
+  // .json(`coffee ID: ${res.body.coffeeID} deleted from DB`)
+})
 
 app.use((req, res) => res.sendStatus(404));
 
