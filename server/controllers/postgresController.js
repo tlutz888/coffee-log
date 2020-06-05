@@ -53,5 +53,36 @@ postgresController.deleteCoffee = (req, res, next) => {
       message: err,
     }));
 }
+postgresController.getRoasters = (req, res, next) => {
+  console.log('getting roasters')
+  db.query('SELECT * FROM "public"."roasters";')
+    .then(data => {
+      console.log(data.rows)
+      res.locals.roasters = data.rows;
+      return next()
+    })
+    .catch(err => next({
+      log: 'Error in postgresController.getRoasters',
+      status: 400,
+      message: err,
+    }));
+}
+
+postgresController.addRoaster = (req, res, next) => {
+  console.log('adding roaster: ', req.body);
+  const { name } = req.body;
+  const values = [name];
+  const queryText = 'INSERT INTO roasters (name) VALUES ($1);';
+  db.query(queryText, values)
+  .then(data => {
+    console.log(`${ name } has been added to the DB`)
+    return next();
+  })
+  .catch(err => next({
+    log: 'Error in postgresController.getCoffees',
+    status: 400,
+    message: err,
+  }));
+}
 
 module.exports = postgresController;

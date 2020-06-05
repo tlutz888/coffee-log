@@ -24,10 +24,22 @@ app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, '../client/index.html'))
 });
 
+app.get('/roasters', postgresController.getRoasters, (req, res) => {
+  console.log('in roaster route')
+  res.status(200).json(res.locals.roasters);
+})
+
+app.post('/roasters', postgresController.addRoaster, (req, res) => {
+  console.log('in add roaster route')
+  res.status(201).json('roaster added!');
+})
+
+
 app.get('/api', postgresController.getCoffees, (req, res) => {
   console.log('at /api ');
   res.status(200).json(res.locals.data);
 })
+
 
 
 app.post('/api', postgresController.addCoffee, (req, res) => {

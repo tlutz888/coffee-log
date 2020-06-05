@@ -9,6 +9,7 @@ const AddCoffee = (props) => {
     roast_date: Date.now(),
     brew_details: '',
     rating: '',
+    add_roaster: '',
   });
 
   const handleChange = (e) => {
@@ -53,20 +54,43 @@ const AddCoffee = (props) => {
       .catch(err => console.log('err in mainContainer post ', err))
   }
 
+  const addRoaster = (e) => {
+    console.log(e.target.value)
+    const newRoaster = e.target.value;
+    if (newRoaster === '') return;
+    fetch('/roasters', {
+      method: 'POST',
+      headers: {
+        'content-type': 'application/json',
+      },
+      body: JSON.stringify({name: newRoaster})})
+      .then(console.log('clicked'))
+    
+    
+  }
+
   const {roaster_id, bean_name, bean_origin, brew_details, rating} = details;
   let { roast_date } = details;
   roast_date = new Date(roast_date)
+
+  const roasterList = props.roasters.map(roaster => {
+    return <option value={roaster._id}>{roaster.name}</option>
+  })
 
   return (
     <div className="coffeeForm">
       <h2>Enter New Coffee: </h2>
 
       <div className="roaster-entry">
-      <label htmlFor="roaster_id">Roaster: </label>
-      <select  name="roaster_id" value={details.roaster_id} onChange={handleChange}>
-          <option value="1">Vesta</option>
-          <option value="2">Mothership</option>
-          <option value="3">Dark Moon</option>
+        <label htmlFor="roaster_id">Roaster: 
+          <button onClick={addRoaster}>
+            Add: 
+            <label htmlFor="add_roaster"></label>
+            <input name="add_roaster" type="text" onChange={handleChange} value={details.add_roaster}/>
+          </button>
+        </label>
+        <select  name="roaster_id" value={details.roaster_id} onChange={handleChange}>
+          {roasterList}
         </select>
       </div>
 
@@ -100,22 +124,5 @@ const AddCoffee = (props) => {
   );
 
 }
-
-
-// const AddCoffee = (props) => {
-//   const formData = 
-//   return (
-//     <div>
-//       <input type="text" value={''}/>
-//       <select multiple={true} >
-//         <option value="grapefruit">Grapefruie</option>
-//         <option value="pineapple">pineapple</option>
-//         <option value="banana">banana</option>
-//         <option value="banana">apple</option>
-//       </select>
-//       <button>Add a Coffee</button>
-//     </div>
-//   );
-// }
 
 export default AddCoffee;

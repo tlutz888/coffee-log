@@ -23,11 +23,15 @@ module.exports = {
     publicPath: '/dist/',
     historyApiFallback: true,
     proxy: {
-      '/api*':  {
+      '*':  {
         target: 'http://localhost:3000/',
         secure: false,
       },
-      '/add*':  {
+      '/roasters*':  {
+        target: 'http://localhost:3000/',
+        secure: false,
+      },
+      '/api/roasters*':  {
         target: 'http://localhost:3000/',
         secure: false,
       },

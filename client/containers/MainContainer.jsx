@@ -9,14 +9,26 @@ class MainContainer extends Component {
     super(props);
     this.state = {
       coffees: [],
+      roasters: [],
     };
     this.deleteCoffee = this.deleteCoffee.bind(this);
     this.updateList = this.updateList.bind(this);
+    this.getRoasters = this.getRoasters.bind(this)
   }
 
   componentDidMount() {
     console.log('component mounted')
-    this.updateList()
+    this.getRoasters();
+    this.updateList();
+  }
+  getRoasters() {
+    console.log('getting roasters! ')
+    fetch('/roasters')
+      .then(res => res.json())
+      .then(data => {
+        console.log(data)
+        this.setState({ roasters: data })
+      })
   }
 
   updateList () {
@@ -24,7 +36,7 @@ class MainContainer extends Component {
     .then(res => res.json())
     .then(data => {
       console.log('data from get all coffees request: ', data);
-      this.setState({coffees: data})
+      this.setState({coffees: data});
     })
     .catch(err => console.log('err in mainContainer fetch ', err))
   }
@@ -59,8 +71,12 @@ class MainContainer extends Component {
     return (
 
       <div>
+        <button onClick={this.getRoasters}>get roasters</button>
         {/* <AddCoffee/> */}
-        <AddCoffeeHooks updateList={this.updateList}/>
+        <AddCoffeeHooks 
+          updateList={this.updateList}
+          roasters={this.state.roasters}
+          />
         {coffeeCards}
     </div>
     );
