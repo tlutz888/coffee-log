@@ -22,8 +22,6 @@ class AddCoffee extends Component {
   }
 
 
-
-  
   handleClick(e) {
     // do this
     console.log('clicked, e: ', e)
