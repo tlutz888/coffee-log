@@ -21,6 +21,7 @@ class AddCoffee extends Component {
     this.setState({ [targetName]: value });
   }
  
+  
   handleClick(e) {
     // do this
     console.log('clicked, e: ', e)
