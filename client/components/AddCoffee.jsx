@@ -32,7 +32,7 @@ class AddCoffee extends Component {
     const reqData = {
       roaster_id,
       bean_name,
-      bean_origin,
+      bean_origin, 
       roast_date,
       brew_details,
       rating
