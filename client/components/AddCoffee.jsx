@@ -20,7 +20,7 @@ class AddCoffee extends Component {
     const value = e.target.value;
     this.setState({ [targetName]: value });
   }
-  
+    
   
   handleClick(e) {
     // do this
